@@ -10,6 +10,11 @@
     {{ username }}:
   </h4>
   <div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-secondary mb-3 my-0" (click)="goBack()">
+        Back to Dashboard
+      </button>
+    </div>
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let repo of repos">
         <div class="d-flex justify-content-between">

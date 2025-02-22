@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSourceService } from '../../core/services/data-source.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -15,7 +15,8 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(
     private dataSourceService: DataSourceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.username = this.route.snapshot.paramMap.get('login')!;
   }
@@ -27,5 +28,9 @@ export class UserDetailsComponent implements OnInit {
         console.log('🚀 ~ DashboardComponent ~ .subscribe ~ repos:', repos);
         this.repos = repos;
       });
+  }
+
+  goBack() {
+    this.router.navigate(['/dashboard']);
   }
 }
