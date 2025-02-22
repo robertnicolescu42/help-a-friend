@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-4" *ngIf="!(loading$ | async); else loading">
   <h4 class="mb-3 text-center">
     Repository list for
     <img
@@ -47,4 +47,8 @@
   <button class="btn btn-secondary mb-3" (click)="goBack()">
     Back to Dashboard
   </button>
+</ng-template>
+
+<ng-template #loading>
+  <app-loading></app-loading>
 </ng-template>

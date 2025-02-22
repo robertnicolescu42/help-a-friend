@@ -1,9 +1,15 @@
-<div *ngIf="users.length > 0; else noUsers">
-  <app-user-list [users]="users"></app-user-list>
+<div *ngIf="!(loading$ | async); else loading">
+  <div *ngIf="users.length > 0; else noUsers">
+    <app-user-list [users]="users"></app-user-list>
+  </div>
 </div>
 
 <ng-template #noUsers>
   <div class="container mt-4">
     <h4 class="mb-3 text-center">No users found</h4>
-  </div></ng-template
->
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
