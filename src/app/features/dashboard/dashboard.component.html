@@ -1,6 +1,19 @@
-<div *ngIf="!(loading$ | async); else loading">
-  <div *ngIf="users.length > 0; else noUsers">
-    <app-user-list [users]="users"></app-user-list>
+<div class="container mt-4">
+  <h2 class="mb-3 text-center">GitHub Users</h2>
+  <div *ngIf="!(loading$ | async); else loading">
+    <div *ngIf="users.length > 0; else noUsers">
+      <div
+        class="user-list-container border rounded"
+        infiniteScroll
+        (scrolled)="loadMoreUsers()"
+        [infiniteScrollDistance]="scrollDistance"
+        [infiniteScrollUpDistance]="scrollUpDistance"
+        [infiniteScrollThrottle]="scrollThrottle"
+        [scrollWindow]="false"
+      >
+        <app-user-list [users]="users"></app-user-list>
+      </div>
+    </div>
   </div>
 </div>
 
