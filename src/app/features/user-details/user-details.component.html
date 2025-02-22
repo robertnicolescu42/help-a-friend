@@ -26,7 +26,15 @@
     <div class="d-flex justify-content-end">
       <ng-container *ngTemplateOutlet="goBackButton"></ng-container>
     </div>
-    <ul class="list-group">
+    <ul
+      class="list-group"
+      infiniteScroll
+      (scrolled)="loadMoreRepos()"
+      [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollUpDistance]="scrollUpDistance"
+      [infiniteScrollThrottle]="scrollThrottle"
+      [scrollWindow]="false"
+    >
       <li class="list-group-item" *ngFor="let repo of repos">
         <div class="d-flex justify-content-between">
           <div class="d-flex align-items-center user-select-none">

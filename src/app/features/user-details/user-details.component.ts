@@ -5,10 +5,16 @@ import { CommonModule } from '@angular/common';
 import { Repo } from '../../core/types/repo';
 import { LoadingComponent } from '../../core/shared/loading/loading.component';
 import { BehaviorSubject, tap } from 'rxjs';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 
 @Component({
   selector: 'app-user-details',
-  imports: [RouterModule, CommonModule, LoadingComponent],
+  imports: [
+    RouterModule,
+    CommonModule,
+    LoadingComponent,
+    InfiniteScrollDirective,
+  ],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss',
 })
@@ -16,6 +22,10 @@ export class UserDetailsComponent implements OnInit {
   username: string = '';
   repos: Repo[] = [];
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  currentPage: number = 1;
+  scrollDistance: number = 1;
+  scrollUpDistance: number = 2;
+  scrollThrottle: number = 300;
 
   constructor(
     private dataSourceService: DataSourceService,
@@ -29,15 +39,29 @@ export class UserDetailsComponent implements OnInit {
     this.fetchRepos();
   }
 
-  fetchRepos(): void {
+  fetchRepos(page: number = 1): void {
     this.dataSourceService
-      .fetchUserRepos(1, this.username)
-      .pipe(tap(() => this.loading$.next(true)))
+      .fetchUserRepos(page, this.username)
+      .pipe(
+        tap(() => {
+          if (page === 1) {
+            this.loading$.next(true);
+          }
+        })
+      )
       .subscribe((repos) => {
-        console.log('🚀 ~ DashboardComponent ~ .subscribe ~ repos:', repos);
-        this.repos = repos;
+        if (page === 1) {
+          this.repos = repos;
+        } else {
+          this.repos = [...this.repos, ...repos];
+        }
         this.loading$.next(false);
       });
+  }
+
+  loadMoreRepos(): void {
+    this.currentPage++;
+    this.fetchRepos(this.currentPage);
   }
 
   goBack() {

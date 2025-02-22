@@ -36,7 +36,6 @@ export class DashboardComponent implements OnInit {
       .fetchUsers(page)
       .pipe(tap(() => this.loading$.next(true)))
       .subscribe((users) => {
-        console.log('🚀 ~ DashboardComponent ~ loadUsers ~ users:', users);
         this.users = this.users.concat(users);
         this.loading$.next(false);
       });
