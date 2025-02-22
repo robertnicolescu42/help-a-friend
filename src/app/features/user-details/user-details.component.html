@@ -1,7 +1,8 @@
 <div class="container mt-4" *ngIf="!(loading$ | async); else loading">
-  <h4 class="mb-3 text-center">
+  <h4 class="mb-3 text-center" *ngIf="repos?.[0]?.owner; else error">
     Repository list for
     <img
+      *ngIf="repos[0].owner?.avatar_url; else noAvatar"
       class="rounded-circle"
       [src]="repos[0].owner.avatar_url"
       alt="Avatar"
@@ -9,28 +10,38 @@
     />
     {{ username }}:
   </h4>
-  <div>
-    <div *ngIf="repos.length > 0; else noRepos">
-      <div class="d-flex justify-content-end">
-        <ng-container *ngTemplateOutlet="goBackButton"></ng-container>
-      </div>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let repo of repos">
-          <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-center user-select-none">
-              <h5 class="ms-3">{{ repo.name }}</h5>
-            </div>
-            <a
-              target="_blank"
-              [href]="repo.html_url"
-              class="btn btn-outline-primary align-self-center"
-            >
-              View
-            </a>
-          </div>
-        </li>
-      </ul>
+
+  <ng-template #noAvatar>
+    <span class="text-muted">No avatar available</span>
+  </ng-template>
+
+  <p *ngIf="repos?.[0]?.owner" class="mb-3 text-center text-small">
+    User type:
+    <span class="fw-bold">
+      {{ repos[0].owner.type }}
+    </span>
+  </p>
+
+  <div *ngIf="repos && repos.length > 0; else noRepos">
+    <div class="d-flex justify-content-end">
+      <ng-container *ngTemplateOutlet="goBackButton"></ng-container>
     </div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let repo of repos">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center user-select-none">
+            <h5 class="ms-3">{{ repo.name }}</h5>
+          </div>
+          <a
+            target="_blank"
+            [href]="repo.html_url"
+            class="btn btn-outline-primary align-self-center"
+          >
+            View
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -51,4 +62,11 @@
 
 <ng-template #loading>
   <app-loading></app-loading>
+</ng-template>
+
+<ng-template #error>
+  <div class="container mt-4">
+    <h4 class="mb-3 text-center text-danger">Error loading repository data</h4>
+    <p class="text-center">Please try again later or check the username.</p>
+  </div>
 </ng-template>

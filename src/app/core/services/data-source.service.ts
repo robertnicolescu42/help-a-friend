@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { User } from '../types/user';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Repo } from '../types/repo';
@@ -18,15 +19,26 @@ export class DataSourceService {
       .set('per_page', this.numberOfItemsPerPage)
       .set('page', page);
 
-    return this.http.get<any>(`${this.apiUrl}/users`, { params });
+    return this.http.get<User[]>(`${this.apiUrl}/users`, { params }).pipe(
+      catchError((error) => {
+        return of([]);
+      })
+    );
   }
 
   fetchUserRepos(page: number, username: string): Observable<Repo[]> {
     const params = new HttpParams()
       .set('per_page', this.numberOfItemsPerPage)
       .set('page', page);
-    return this.http.get<Repo[]>(`${this.apiUrl}/users/${username}/repos`, {
-      params,
-    });
+    return this.http
+      .get<Repo[]>(`${this.apiUrl}/users/${username}/repos`, { params })
+      .pipe(
+        catchError((error) => {
+          if (error.status === 404) {
+            return of([]);
+          }
+          throw error;
+        })
+      );
   }
 }

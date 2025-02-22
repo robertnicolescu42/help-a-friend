@@ -8,7 +8,11 @@ import { LoadingComponent } from '../../core/shared/loading/loading.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [UserListComponent, CommonModule, LoadingComponent],
+  imports: [
+    UserListComponent,
+    CommonModule,
+    LoadingComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
