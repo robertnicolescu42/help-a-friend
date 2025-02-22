@@ -1,1 +1,30 @@
-<p>user-details works!</p>
+<div class="container mt-4">
+  <h4 class="mb-3 text-center">
+    Repository list for
+    <img
+      class="rounded-circle"
+      [src]="repos[0].owner.avatar_url"
+      alt="Avatar"
+      class="user-avatar"
+    />
+    {{ username }}:
+  </h4>
+  <div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let repo of repos">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center user-select-none">
+            <h5 class="ms-3">{{ repo.name }}</h5>
+          </div>
+          <a
+            target="_blank"
+            [href]="repo.html_url"
+            class="btn btn-outline-primary align-self-center"
+          >
+            View
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

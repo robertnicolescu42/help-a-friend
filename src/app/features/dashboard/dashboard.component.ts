@@ -20,12 +20,6 @@ export class DashboardComponent implements OnInit {
         users
       );
       this.users = users;
-
-      this.dataSourceService
-        .fetchUserRepos(1, users[0].login)
-        .subscribe((repos) => {
-          console.log('🚀 ~ DashboardComponent ~ .subscribe ~ repos:', repos);
-        });
     });
   }
 }
