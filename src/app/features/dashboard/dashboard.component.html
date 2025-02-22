@@ -1,1 +1,9 @@
-<app-user-list [users]="users"></app-user-list>
+<div *ngIf="users.length > 0; else noUsers">
+  <app-user-list [users]="users"></app-user-list>
+</div>
+
+<ng-template #noUsers>
+  <div class="container mt-4">
+    <h4 class="mb-3 text-center">No users found</h4>
+  </div></ng-template
+>

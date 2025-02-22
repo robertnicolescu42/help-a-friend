@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../types/user';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Repo } from '../types/repo';
 
 @Injectable({
   providedIn: 'root',
@@ -20,10 +21,12 @@ export class DataSourceService {
     return this.http.get<any>(`${this.apiUrl}/users`, { params });
   }
 
-  fetchUserRepos(page: number, username: string): Observable<any> {
+  fetchUserRepos(page: number, username: string): Observable<Repo[]> {
     const params = new HttpParams()
       .set('per_page', this.numberOfItemsPerPage)
       .set('page', page);
-    return this.http.get(`${this.apiUrl}/users/${username}/repos`, { params });
+    return this.http.get<Repo[]>(`${this.apiUrl}/users/${username}/repos`, {
+      params,
+    });
   }
 }

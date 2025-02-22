@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { UserListComponent } from '../user-list/user-list.component';
 import { DataSourceService } from '../../core/services/data-source.service';
 import { User } from '../../core/types/user';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [UserListComponent],
+  imports: [UserListComponent, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

@@ -10,26 +10,41 @@
     {{ username }}:
   </h4>
   <div>
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-secondary mb-3 my-0" (click)="goBack()">
-        Back to Dashboard
-      </button>
-    </div>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let repo of repos">
-        <div class="d-flex justify-content-between">
-          <div class="d-flex align-items-center user-select-none">
-            <h5 class="ms-3">{{ repo.name }}</h5>
+    <div *ngIf="repos.length > 0; else noRepos">
+      <div class="d-flex justify-content-end">
+        <ng-container *ngTemplateOutlet="goBackButton"></ng-container>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let repo of repos">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center user-select-none">
+              <h5 class="ms-3">{{ repo.name }}</h5>
+            </div>
+            <a
+              target="_blank"
+              [href]="repo.html_url"
+              class="btn btn-outline-primary align-self-center"
+            >
+              View
+            </a>
           </div>
-          <a
-            target="_blank"
-            [href]="repo.html_url"
-            class="btn btn-outline-primary align-self-center"
-          >
-            View
-          </a>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
+
+<ng-template #noRepos>
+  <div class="container mt-4">
+    <h4 class="mb-3 text-center">No repositories found for {{ username }}</h4>
+    <div class="d-flex justify-content-center">
+      <ng-container *ngTemplateOutlet="goBackButton"></ng-container>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #goBackButton>
+  <button class="btn btn-secondary mb-3" (click)="goBack()">
+    Back to Dashboard
+  </button>
+</ng-template>

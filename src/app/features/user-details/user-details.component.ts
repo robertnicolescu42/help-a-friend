@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataSourceService } from '../../core/services/data-source.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Repo } from '../../core/types/repo';
 
 @Component({
   selector: 'app-user-details',
@@ -11,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UserDetailsComponent implements OnInit {
   username: string = '';
-  repos: any[] = [];
+  repos: Repo[] = [];
 
   constructor(
     private dataSourceService: DataSourceService,
