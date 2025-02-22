@@ -1,12 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { User } from '../../core/types/user';
 
 @Component({
   selector: 'app-user-list',
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent {
   @Input()
-  users: any[] = [];
+  page: number = 1;
+
+  @Input()
+  users: User[] = [];
 }

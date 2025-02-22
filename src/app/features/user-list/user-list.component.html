@@ -1,1 +1,26 @@
-<app-user-list [users]="users"></app-user-list>
+<div class="container mt-4">
+  <h2 class="mb-3 text-center">GitHub Users</h2>
+  <div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let user of users">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center user-select-none">
+            <img
+              class="rounded-circle"
+              [src]="user.avatar_url"
+              alt="Avatar"
+              class="user-avatar"
+            />
+            <h5 class="ms-3">{{ user.login }}</h5>
+          </div>
+          <a
+            [routerLink]="['/user', user.login]"
+            class="btn btn-outline-primary align-self-center"
+          >
+            View Repos
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
