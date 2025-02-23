@@ -5,4 +5,5 @@ export interface Repo {
   html_url?: string;
   name?: string;
   owner?: User;
+  description?: string;
 }

@@ -1,26 +1,28 @@
 <div class="container mt-4" *ngIf="!(loading$ | async); else loading">
   <h4 class="mb-3 text-center" *ngIf="repos?.[0]?.owner; else error">
-    Repository list for
     <img
       *ngIf="repos[0].owner?.avatar_url; else noAvatar"
-      class="rounded-circle"
-      [src]="repos[0].owner.avatar_url"
+      class="rounded-circle user-avatar"
+      [src]="repos[0].owner?.avatar_url"
       alt="Avatar"
-      class="user-avatar"
     />
-    {{ username }}:
+    <span class="user-select-none"> Repository list for </span>
+
+    <span
+      class="d-inline-flex align-items-center user-select-none"
+      data-bs-toggle="tooltip"
+      title="User Type"
+    >
+      {{ username }}
+      <span class="badge bg-info ms-2 user-type-badge">
+        {{ repos[0].owner?.type }}
+      </span>
+    </span>
   </h4>
 
   <ng-template #noAvatar>
     <span class="text-muted">No avatar available</span>
   </ng-template>
-
-  <p *ngIf="repos?.[0]?.owner" class="mb-3 text-center text-small">
-    User type:
-    <span class="fw-bold">
-      {{ repos[0].owner.type }}
-    </span>
-  </p>
 
   <div *ngIf="repos && repos.length > 0; else noRepos">
     <div class="d-flex justify-content-end">
@@ -39,13 +41,26 @@
         <div class="d-flex justify-content-between">
           <div class="d-flex align-items-center user-select-none">
             <h5 class="ms-3">{{ repo.name }}</h5>
+
+            <span *ngIf="repo.description" class="text-muted ms-3">
+              <span
+                *ngIf="repo.description.length > 100"
+                [title]="repo.description"
+                data-bs-toggle="tooltip"
+              >
+                {{ repo.description | slice : 0 : 100 }}...
+              </span>
+              <span *ngIf="repo.description.length <= 100">
+                {{ repo.description }}
+              </span>
+            </span>
           </div>
           <a
             target="_blank"
             [href]="repo.html_url"
             class="btn btn-outline-primary align-self-center"
           >
-            View
+            Browse
           </a>
         </div>
       </li>

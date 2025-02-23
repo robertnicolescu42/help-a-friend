@@ -3,18 +3,25 @@
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let user of users">
         <div class="d-flex justify-content-between">
-          <div class="d-flex align-items-center user-select-none">
-            <img
-              class="rounded-circle"
-              [src]="user.avatar_url"
-              alt="Avatar"
-              class="user-avatar"
-            />
-            <h5 class="ms-3">{{ user.login }}</h5>
+          <div class="d-flex align-items-center">
+            <a
+              [href]="'https://github.com/' + user.login"
+              target="_blank"
+              class="d-flex align-items-center text-decoration-none text-dark"
+            >
+              <img
+                [src]="user.avatar_url"
+                alt="Avatar"
+                class="rounded-circle me-3 user-avatar"
+              />
+              <h5 class="m-0">
+                {{ user.login }}
+              </h5>
+            </a>
           </div>
           <a
-            [routerLink]="['/user', user.login]"
             class="btn btn-outline-primary align-self-center"
+            [routerLink]="['/user', user.login]"
           >
             View Repos
           </a>
