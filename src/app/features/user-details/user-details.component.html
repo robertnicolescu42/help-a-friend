@@ -2,11 +2,11 @@
   <h4 class="mb-3 text-center" *ngIf="repos?.[0]?.owner; else error">
     <img
       *ngIf="repos[0].owner?.avatar_url; else noAvatar"
-      class="rounded-circle user-avatar"
+      class="rounded-circle user-avatar mb-2"
       [src]="repos[0].owner?.avatar_url"
       alt="Avatar"
     />
-    <span class="user-select-none"> Repository list for </span>
+    <span class="user-select-none">Repository list for</span>
 
     <span
       class="d-inline-flex align-items-center user-select-none"
@@ -14,9 +14,7 @@
       title="User Type"
     >
       {{ username }}
-      <span class="badge bg-info ms-2 user-type-badge">
-        {{ repos[0].owner?.type }}
-      </span>
+      <app-user-type-badge [type]="repos[0].owner?.type"></app-user-type-badge>
     </span>
   </h4>
 
@@ -38,11 +36,12 @@
       [scrollWindow]="false"
     >
       <li class="list-group-item" *ngFor="let repo of repos">
-        <div class="d-flex justify-content-between">
-          <div class="d-flex align-items-center user-select-none">
-            <h5 class="ms-3">{{ repo.name }}</h5>
-
-            <span *ngIf="repo.description" class="text-muted ms-3">
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-md-center"
+        >
+          <div class="d-flex flex-column ms-3 mb-2 mb-md-0">
+            <h5>{{ repo.name }}</h5>
+            <div *ngIf="repo.description" class="d-flex flex-column">
               <span
                 *ngIf="repo.description.length > 100"
                 [title]="repo.description"
@@ -53,12 +52,12 @@
               <span *ngIf="repo.description.length <= 100">
                 {{ repo.description }}
               </span>
-            </span>
+            </div>
           </div>
           <a
             target="_blank"
             [href]="repo.html_url"
-            class="btn btn-outline-primary align-self-center"
+            class="btn btn-outline-primary"
           >
             Browse
           </a>

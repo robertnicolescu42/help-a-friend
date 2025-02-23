@@ -2,8 +2,8 @@
   <div>
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let user of users">
-        <div class="d-flex justify-content-between">
-          <div class="d-flex align-items-center">
+        <div class="d-flex flex-column flex-md-row justify-content-between">
+          <div class="d-flex align-items-center mb-3 mb-md-0">
             <a
               [href]="'https://github.com/' + user.login"
               target="_blank"
@@ -16,11 +16,12 @@
               />
               <h5 class="m-0">
                 {{ user.login }}
+                <app-user-type-badge [type]="user.type"></app-user-type-badge>
               </h5>
             </a>
           </div>
           <a
-            class="btn btn-outline-primary align-self-center"
+            class="btn btn-outline-primary align-self-md-center"
             [routerLink]="['/user', user.login]"
           >
             View Repos

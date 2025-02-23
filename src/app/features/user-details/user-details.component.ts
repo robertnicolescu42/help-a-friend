@@ -6,7 +6,7 @@ import { Repo } from '../../core/types/repo';
 import { LoadingComponent } from '../../core/shared/loading/loading.component';
 import { BehaviorSubject, tap } from 'rxjs';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
-
+import { UserTypeBadgeComponent } from '../../core/shared/user-type-badge/user-type-badge.component';
 @Component({
   selector: 'app-user-details',
   imports: [
@@ -14,6 +14,7 @@ import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
     CommonModule,
     LoadingComponent,
     InfiniteScrollDirective,
+    UserTypeBadgeComponent,
   ],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss',

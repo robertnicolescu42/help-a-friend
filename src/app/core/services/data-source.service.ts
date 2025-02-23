@@ -10,7 +10,7 @@ import { Repo } from '../types/repo';
 })
 export class DataSourceService {
   apiUrl: string = 'https://api.github.com';
-  numberOfItemsPerPage: number = 10;
+  numberOfItemsPerPage: number = 15;
 
   constructor(private http: HttpClient) {}
 
@@ -39,6 +39,8 @@ export class DataSourceService {
         catchError((error) => {
           if (error.status === 404) {
             return of([]);
+          } else if (error.status === 403) {
+            throw new Error('Rate limit exceeded');
           }
           throw error;
         })
