@@ -4,7 +4,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 # GitHub API Token
 
-If you browse too much you might end up using all of your quota. Just [create a token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) and paste it it the src/environment.ts file to fix this.
+If you browse too much you might end up using all of your quota. Just [create a token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) and paste it it the src/environments/environment.ts file to fix this.
 
 ## Development server
 
