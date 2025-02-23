@@ -21,17 +21,26 @@ describe('DataSourceService', () => {
   });
 
   afterEach(() => {
+    // this makes sure that no requests were left unhandled
     httpMock.verify();
   });
 
-  it('should fetch users', () => {
+  it('should fetch a list of users', () => {
     const dummyUsers: User[] = [
       { id: 1, login: 'user1' },
       { id: 2, login: 'user2' },
+      { id: 3, login: 'user3' },
+      { id: 4, login: 'user4' },
+      { id: 5, login: 'user5' },
+      { id: 6, login: 'user6' },
+      { id: 7, login: 'user7' },
+      { id: 8, login: 'user8' },
+      { id: 9, login: 'user9' },
+      { id: 10, login: 'user10' },
     ];
 
     service.fetchUsers(0).subscribe((users) => {
-      expect(users.length).toBe(2);
+      expect(users.length).toBe(service.numberOfItemsPerPage);
       expect(users).toEqual(dummyUsers);
     });
 
@@ -54,7 +63,7 @@ describe('DataSourceService', () => {
     req.flush('Error', { status: 500, statusText: 'Server Error' });
   });
 
-  it('should fetch user repos', () => {
+  it('should fetch a list of the user repos', () => {
     const dummyRepos: Repo[] = [
       { id: 1, name: 'repo1' },
       { id: 2, name: 'repo2' },

@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { User } from '../../core/types/user';
+import { of } from 'rxjs';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -21,5 +23,9 @@ describe('DashboardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should initialize with an empty users array', () => {
+    expect(component.users.length).toBe(0);
   });
 });
