@@ -10,7 +10,7 @@ import { Repo } from '../types/repo';
 })
 export class DataSourceService {
   apiUrl: string = 'https://api.github.com';
-  numberOfItemsPerPage: number = 15;
+  numberOfItemsPerPage: number = 10;
 
   constructor(private http: HttpClient) {}
 
