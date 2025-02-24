@@ -6,14 +6,16 @@
       [src]="repos[0].owner?.avatar_url"
       alt="Avatar"
     />
-    <span class="user-select-none">Repository list for</span>
+    <span class="user-select-none">Repository list for </span>
 
     <span
       class="d-inline-flex align-items-center user-select-none"
       data-bs-toggle="tooltip"
       title="User Type"
     >
-      {{ username }}
+      <span>
+        {{ username }}
+      </span>
       <app-user-type-badge [type]="repos[0].owner?.type"></app-user-type-badge>
     </span>
   </h4>
