@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { User } from '../../core/types/user';
 import { of } from 'rxjs';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -12,7 +13,7 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardComponent, RouterModule],
+      imports: [DashboardComponent, RouterModule, ToastrModule.forRoot()],
       providers: [provideHttpClient()],
     }).compileComponents();
 

@@ -6,6 +6,7 @@ import {
 import { DataSourceService } from './data-source.service';
 import { User } from '../types/user';
 import { Repo } from '../types/repo';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('DataSourceService', () => {
   let service: DataSourceService;
@@ -13,7 +14,7 @@ describe('DataSourceService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, ToastrModule.forRoot()],
       providers: [DataSourceService],
     });
     service = TestBed.inject(DataSourceService);
