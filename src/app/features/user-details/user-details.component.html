@@ -2,7 +2,7 @@
   <h4 class="mb-3 text-center" *ngIf="repos?.[0]?.owner; else error">
     <img
       *ngIf="repos[0].owner?.avatar_url; else noAvatar"
-      class="rounded-circle user-avatar mb-2"
+      class="rounded-circle user-avatar mb-2 me-2"
       [src]="repos[0].owner?.avatar_url"
       alt="Avatar"
     />
